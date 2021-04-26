@@ -1,0 +1,39 @@
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+        <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
+          <div class="form-group">
+            <label>Title</label>
+            <input class="form-control" type="text" formControlName="eventTitle" required>
+          </div>
+  
+          <div class="form-group">
+            <label>Description</label>
+            <input class="form-control" type="text" formControlName="eventDescription" required>
+          </div>
+  
+          <div class="form-group">
+            <label>Start date</label>
+            <input class="form-control" type="date" formControlName="startDate" required>
+          </div>
+
+          <div class="form-group">
+            <label>End date</label>
+            <input class="form-control" type="date" formControlName="endDate" required>
+          </div>
+
+          <div class="form-group">
+            <label>Avenue</label>
+            <input class="form-control" type="text" formControlName="avenue" required>
+          </div>
+
+          <div class="form-group">
+            <label>Max members</label>
+            <input class="form-control" type="number" formControlName="maxMembers" required>
+          </div>
+  
+          <div class="form-group">
+            <button class="btn btn-primary btn-block" type="submit">Update</button>
+          </div>
+        </form>
+    </div>
+  </div>
