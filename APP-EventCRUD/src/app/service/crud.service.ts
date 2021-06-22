@@ -25,8 +25,13 @@ export class CrudService {
       .pipe(catchError(this.handleError));
   }
 
-  getEvents() {
+  getEventsLength() {
     return this.httpClient.get(`${this.REST_API}/events`);
+  }
+
+  getEvents(offset: Number, limit: Number) {
+    console.log(`${this.REST_API}/events/${offset}/${limit}`);
+    return this.httpClient.get(`${this.REST_API}/events/${offset}/${limit}`);
   }
 
   getEvent(id: any): Observable<any> {

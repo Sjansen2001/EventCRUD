@@ -1,4 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { CrudService } from 'src/app/service/crud.service';
 
@@ -9,6 +10,7 @@ import { CrudService } from 'src/app/service/crud.service';
 })
 export class EventsListComponent implements OnInit {
   Events: any = [];
+  EventsLength: any = [];
 
   constructor(
     private crudService: CrudService,
@@ -17,7 +19,11 @@ export class EventsListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.crudService.getEvents().subscribe((res) => {
+    this.crudService.getEventsLength().subscribe((res) => {
+      console.log(res);
+      this.EventsLength = res;
+    });
+    this.crudService.getEvents(0, 10).subscribe((res) => {
       console.log(res);
       this.Events = res;
     });
@@ -30,5 +36,19 @@ export class EventsListComponent implements OnInit {
         this.Events.spilce(i, 1);
       });
     }
+  }
+
+  onPageChange(event: PageEvent) {
+    console.log(event);
+    const limit = event.pageSize;
+    console.log(`The page size is: ${limit}`);
+    const pageIndex = event.pageIndex;
+    console.log(`The page index is: ${pageIndex}`);
+    const offset = pageIndex * limit;
+    console.log(`The start index is: ${offset}`);
+    this.crudService.getEvents(offset, limit).subscribe((res) => {
+      console.log(res);
+      this.Events = res;
+    });
   }
 }

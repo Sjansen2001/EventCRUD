@@ -8,11 +8,11 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'add-event' },
   { path: 'events-list', component: EventsListComponent },
   { path: 'add-event', component: AddEventComponent },
-  { path: 'edit-event/:id', component: EventDetailComponent }
+  { path: 'edit-event/:id', component: EventDetailComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

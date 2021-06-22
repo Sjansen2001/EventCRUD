@@ -1,9 +1,21 @@
 <div class="container">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h2 class="h2">Events List</h2>
-    </div>
-  
-    <div class="table-responsive">
+  <div
+    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+  >
+    <h2 class="h2">Events List</h2>
+  </div>
+
+  <mat-paginator
+    [length]="EventsLength.length"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    [showFirstLastButtons]="true"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+
+  <div class="table-responsive">
+    <cdk-virtual-scroll-viewport itemSize="25" class="example-viewport">
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -18,19 +30,31 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let event of Events; let i = index">
-            <th scope="row">{{event.eventId}}</th>
-            <td>{{event.eventTitle}}</td>
-            <td>{{event.eventDescription}}</td>
-            <td>{{event.startDate}}</td>
-            <td>{{event.endDate}}</td>
-            <td>{{event.avenue}}</td>
-            <td>{{event.maxMembers}}</td>
+          <tr *cdkVirtualFor="let event of Events; let i = index">
+            <th scope="row">{{ event.eventId }}</th>
+            <td>{{ event.eventTitle }}</td>
+            <td>{{ event.eventDescription }}</td>
+            <td>{{ event.startDate }}</td>
+            <td>{{ event.endDate }}</td>
+            <td>{{ event.avenue }}</td>
+            <td>{{ event.maxMembers }}</td>
             <td class="text-center">
-              <button class="btn btn-sm btn-primary" routerLink="/edit-event/{{event.eventId}}">Edit</button>
-              <button class="btn btn-sm btn-danger" (click)="delete(event.eventId, i)">Delete</button>
+              <button
+                class="btn btn-sm btn-primary"
+                routerLink="/edit-event/{{ event.eventId }}"
+              >
+                Edit
+              </button>
+              <button
+                class="btn btn-sm btn-danger"
+                (click)="delete(event.eventId, i)"
+              >
+                Delete
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
-    </div>
+    </cdk-virtual-scroll-viewport>
   </div>
+</div>
